@@ -18,7 +18,7 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
-function createCard(obj) {
+function createCard(data) {
     //create element
     const card = document.createElement('div');
     const headline = document.createElement('div');
@@ -43,9 +43,9 @@ function createCard(obj) {
     name.classList.add('span');
 
     //set text content
-    headline.textContent = obj.headline;
-    author.textContent = obj.author.name;
-    image.src = obj.authorPhoto;
+    headline.textContent = data.headline;
+    author.textContent = data.authorname;
+    image.setAttribute('src', data.authorPhoto);
 
     return card;
 }
@@ -55,11 +55,11 @@ const entryPoint = document.querySelector('.title');
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
 .then(response => {
-    // console.log(response);
-    response.data.forEach(item => {
-        const newCards = createCard(item);
-        entryPoint.append(newCards);
-    })
+    console.log(response);
+    // response.data.forEach(item => {
+        // const newCards = createCard(item);
+        entryPoint.append(createCard(response.data.articles));
+    // })
 })
 .catch(error => {
     console.log('The data was not returned', error)
