@@ -54,12 +54,13 @@ const entryPoint = document.querySelector('.title');
 
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
+
 .then(response => {
-    console.log(response);
-    // response.data.forEach(item => {
-        // const newCards = createCard(item);
+    console.log(response.data);
+
+    response.data.forEach(item => {
         entryPoint.append(createCard(response.data.articles));
-    // })
+    })
 })
 .catch(error => {
     console.log('The data was not returned', error)

@@ -8,56 +8,44 @@
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
 
-function topicsList (obj){
-    const tab = document.createElement('div');
-    const topics1 = document.createElement('ul');
-    // const topic1 = document.createElement('li');
-    // const topic2 = document.createElement('li');
-    // const topic3 = document.createElement('li');
-    // const topic4 = document.createElement('li');
-    // const topic5 = document.createElement('li');
+// var container = document.querySelector('.topics');
 
-    tab.append(topics1);
-    // topics.append(topic1);
-    // topics.append(topic2);
-    // topics.append(topic3);
-    // topics.append(topic4);
-    // topics.append(topic5);
+// axios.get("https://lambda-times-backend.herokuapp.com/topics")
+// .then(response => {
+//     console.log(response.data)
+//    response.data.topics.forEach(topic => {
+//         container.append(createTab(topic))
+//     })   
 
-    // obj.forEach(item => {
-    //     const li = document.createElement('li');
-    //     li.textContent = item;
-    //     topics1.append(li);
-    // })
+// })
 
-    tab.classList.add('tabs');
-    topics1.classList.add('topics');
-    // topic1.classList.add('tab');
-    // topic2.classList.add('tab');
-    // topic3.classList.add('tab');
-    // topic4.classList.add('tab');
-    // topic5.classList.add('tab');
+// function createTab(obj) {
+//     const div1 = document.createElement('div');
 
-    // topics.textContent = "Topics";
-    topics1.textContent = obj.topics;
-    // topic2.textContent = data.topics[1];
-    // topic1.textContent = data.topics[0];
-    // topic1.textContent = data.topics[0];
-    // topic1.textContent = data.topics[0]; 
+//     div1.classList.add('tab');
 
-    return tab;
-}
+//     div1.textContent = obj.topics;
 
-tabList = document.querySelector('.topics');
-console.log(tabList)
+//     return div1;
+// }
 
-// for (var i = 0; i < topics.length; i++){
-    axios.get("https://lambda-times-backend.herokuapp.com/topics")
-    .then(response => {
-        // console.log(response.data);
-               tabList.append(topicsList(response.data))
-    })
 
-.catch(error => {
-    console.log('The data was not returned', error)
-})
+
+var containerb = document.querySelector('.topics')
+      axios.get('https://lambda-times-backend.herokuapp.com/topics')
+      .then( response => {
+          // Remember response is an object, response.data is an array.
+        //   console.log(response)
+          for(var i = 0 ; i < response.data.topics.length ; i++){
+            containerb.appendChild(createTab(response.data.topics[i]))
+          }
+      })
+      .catch( error => {
+          console.log("Error:", err);
+      })
+      function createTab(topic){
+      const div1 = document.createElement('div');
+      div1.classList.add('tab')
+      div1.textContent = topic
+      return div1
+      }
