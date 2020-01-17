@@ -26,11 +26,11 @@ function topics (obj){
 
     tab.classList.add('tabs');
     topics.classList.add('topics');
-    topic1.classList.add(tab);
-    topic2.classList.add(tab);
-    topic3.classList.add(tab);
-    topic4.classList.add(tab);
-    topic5.classList.add(tab);
+    topic1.classList.add('tab');
+    topic2.classList.add('tab');
+    topic3.classList.add('tab');
+    topic4.classList.add('tab');
+    topic5.classList.add('tab');
 
     topics.textContent = "Topics";
     topic1.textContent = topics[0];
@@ -42,7 +42,7 @@ function topics (obj){
     return tab;
 }
 
-tabList = document.querySelector('.title');
+tabList = document.querySelector('.topics');
 
 for (var i = 0; i < topics.length; i++){
     axios.get('https://lambda-times-backend.herokuapp.com/topics' + topics[i])
