@@ -29,38 +29,41 @@ function createCard(data) {
 
     //set up the structure
     card.append(headline);
-    headline.append(author);
+    card.append(author);
     author.append(imageContainer);
     imageContainer.append(image);
-
-
+    author.append(name);
+    
     //add classes to elements
-    card.classList.add('cards-container');
-    headline.classList.add('card');
+    card.classList.add('card');
+    headline.classList.add('headline');
     author.classList.add('author');
     imageContainer.classList.add('img-container');
     image.classList.add('img');
     name.classList.add('span');
 
-    //set text content
+    // //set text content
     headline.textContent = data.headline;
-    author.textContent = data.authorname;
-    image.setAttribute('src', data.authorPhoto);
+    author.textContent = data.authorName;
+    image.src = data.authorPhoto;
+    // image.src = data.authorPhoto;
+    name.textContent = data.authorName;
 
     return card;
 }
 
-const entryPoint = document.querySelector('.title');
+const entryPoint = document.querySelector('.cards-container');
 
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
 
 .then(response => {
-    console.log(response.data);
-
-    response.data.forEach(item => {
-        entryPoint.append(createCard(response.data.articles));
-    })
+   Object.values(response.data.articles).forEach(article => {
+       article.forEach(x => {
+           console.log(article)
+           entryPoint.appendChild(createCard(x))
+       })
+   })
 })
 .catch(error => {
     console.log('The data was not returned', error)
