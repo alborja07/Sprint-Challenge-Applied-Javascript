@@ -15,7 +15,7 @@
 //     console.log(response.data)
 //    response.data.topics.forEach(topic => {
 //         container.append(createTab(topic))
-//     })   
+//     })
 
 // })
 
@@ -29,23 +29,24 @@
 //     return div1;
 // }
 
+var containerb = document.querySelector(".topics");
+axios
+  .get("https://lambda-times-backend.herokuapp.com/topics")
+  .then((response) => {
+    // Remember response is an object, response.data is an array.
+    //   console.log(response)
+    for (var i = 0; i < response.data.topics.length; i++) {
+      containerb.appendChild(createTab(response.data.topics[i]));
+    }
+  })
+  .catch((error) => {
+    console.log("Error:", err);
+  });
 
-
-var containerb = document.querySelector('.topics')
-      axios.get('https://lambda-times-backend.herokuapp.com/topics')
-      .then( response => {
-          // Remember response is an object, response.data is an array.
-        //   console.log(response)
-          for(var i = 0 ; i < response.data.topics.length ; i++){
-            containerb.appendChild(createTab(response.data.topics[i]))
-          }
-      })
-      .catch( error => {
-          console.log("Error:", err);
-      })
-      function createTab(topic){
-      const div1 = document.createElement('div');
-      div1.classList.add('tab')
-      div1.textContent = topic
-      return div1
-      }
+  
+function createTab(topic) {
+  const div1 = document.createElement("div");
+  div1.classList.add("tab");
+  div1.textContent = topic;
+  return div1;
+}
